@@ -1885,6 +1885,36 @@ function googleTranslateElementInit(){
   })();
 </script>
 
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var playBtn = document.getElementById('st-play-btn');
+    var audio = document.getElementById('st-audio');
+    var icon = document.getElementById('st-icon');
+    var label = document.getElementById('st-label');
+
+    if (playBtn && audio) {
+      playBtn.addEventListener('click', function() {
+        if (audio.paused) {
+          audio.play().then(function() {
+            if (icon) icon.textContent = '❚❚';
+            if (label) label.textContent = 'Pausar';
+          }).catch(function(err) {
+            console.error('Error al reproducir audio:', err);
+          });
+        } else {
+          audio.pause();
+          if (icon) icon.textContent = '▶';
+          if (label) label.textContent = 'Reproducir';
+        }
+      });
+
+      audio.addEventListener('ended', function() {
+        if (icon) icon.textContent = '▶';
+        if (label) label.textContent = 'Reproducir';
+      });
+    }
+  });
+</script>
 <button id="back-to-top" aria-label="Volver arriba" title="Volver arriba">↑</button>
 </body>
 </html>
