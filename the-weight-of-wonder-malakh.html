@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>The Weight of Wonder — Malakh — Sea en el Infierno como en el Cielo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0d0817; --ink:#efe9f7; --ink-dim:#a99cc2;
+    --gold:#caa46c; --lavender:#a58fd0; --rule:rgba(255,255,255,.12);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; min-height:100vh; background:var(--bg); color:var(--ink);
+    font-family:'EB Garamond', serif;
+    display:flex; align-items:center; justify-content:center; padding:40px 20px;
+    background-image:radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,.5), transparent),
+                      radial-gradient(1px 1px at 70% 60%, rgba(255,255,255,.4), transparent),
+                      radial-gradient(1px 1px at 40% 80%, rgba(255,255,255,.3), transparent),
+                      radial-gradient(1px 1px at 90% 20%, rgba(255,255,255,.4), transparent);
+  }
+  .card{ max-width:380px; width:100%; text-align:center; }
+  .cover{ width:100%; border-radius:4px; filter:drop-shadow(0 20px 45px rgba(0,0,0,.6)); margin-bottom:26px; }
+  .eyebrow{
+    font-family:'Cinzel',serif; font-size:12px; letter-spacing:.18em; text-transform:uppercase;
+    color:var(--lavender); margin-bottom:8px;
+  }
+  h1{
+    font-family:'Cinzel',serif; font-size:22px; letter-spacing:.04em; font-weight:600;
+    color:var(--ink); margin:0 0 28px;
+  }
+  .play-btn{
+    display:inline-flex; align-items:center; gap:10px; font-family:'Cinzel',serif;
+    font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:#0d0817;
+    background:linear-gradient(120deg,#caa46c,#8c6fb0); border:none; border-radius:2px;
+    padding:14px 26px; cursor:pointer; transition:transform .3s ease, box-shadow .3s ease;
+  }
+  .play-btn:hover{ transform:translateY(-2px); box-shadow:0 10px 24px rgba(180,140,200,.35); }
+  .note{ font-style:italic; color:var(--ink-dim); font-size:13px; line-height:1.7; margin-top:24px; }
+  .footer-mark{ margin-top:40px; font-family:'Cinzel',serif; font-size:10px; letter-spacing:.12em; color:var(--rule); text-transform:uppercase; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <img class="cover" src="the-weight-of-wonder-malakh-cover.jpg" alt="The Weight of Wonder — Malakh — Original Book Soundtrack">
+    <p class="eyebrow">Original Book Soundtrack</p>
+    <h1>The Weight of Wonder — Malakh</h1>
+    <button class="play-btn" id="play-btn" type="button">
+      <span id="icon">▶</span><span id="label">Reproducir</span>
+    </button>
+    <audio id="audio" src="the-weight-of-wonder-malakh.mp3" preload="none"></audio>
+    <p class="note">Pista exclusiva para prensa y ambito academico, incluida en el dossier editorial de Sea en el Infierno como en el Cielo.</p>
+    <p class="footer-mark">Sea en el Infierno como en el Cielo · Fabiola Díaz</p>
+  </div>
+  <script>
+    (function(){
+      var btn=document.getElementById('play-btn'), audio=document.getElementById('audio'),
+          icon=document.getElementById('icon'), label=document.getElementById('label');
+      btn.addEventListener('click', function(){
+        if(audio.paused){ audio.play(); icon.textContent='❚❚'; label.textContent='Pausar'; }
+        else { audio.pause(); icon.textContent='▶'; label.textContent='Reproducir'; }
+      });
+      audio.addEventListener('ended', function(){ icon.textContent='▶'; label.textContent='Reproducir'; });
+    })();
+  </script>
+</body>
+</html>
