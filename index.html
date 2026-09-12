@@ -879,6 +879,22 @@
     text-align:center; color:var(--ink-dim); font-style:italic; font-size:14px; margin-top:36px;
   }
 
+  /* ---------- COMENTARIOS DESTACADOS ---------- */
+  .destacados-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-top:8px;
+  }
+  @media(max-width:800px){ .destacados-grid{ grid-template-columns:1fr; } }
+  .destacado-card{
+    border:1px solid var(--rule); background:rgba(255,255,255,0.02);
+    padding:22px 22px; border-radius:2px; display:flex; flex-direction:column;
+  }
+  .destacado-card .c-autor{
+    font-family:'Cinzel',serif; font-size:13px; letter-spacing:.05em;
+    color:var(--gold); margin-bottom:2px;
+  }
+  .destacado-card .c-cargo{ font-size:12px; color:var(--lavender); font-style:italic; margin-bottom:12px; }
+  .destacado-card .c-texto{ font-size:15px; line-height:1.7; color:var(--ink); flex-grow:1; }
+
 </style>
 
 <!-- Google Translate -->
@@ -998,6 +1014,12 @@ function googleTranslateElementInit(){
     <span>La segunda con el alma.</span>
     
   </blockquote>
+</section>
+
+<section id="comentarios-destacados" class="wide reveal">
+  <p class="eyebrow">Voces del Círculo</p>
+  <h2>Lo que están <em>leyendo</em></h2>
+  <div class="destacados-grid" id="destacados-grid"></div>
 </section>
 
 <div class="divider"></div>
@@ -2075,6 +2097,42 @@ function googleTranslateElementInit(){
       }
     }
     cargarComentarios();
+  })();
+
+  // ── COMENTARIOS DESTACADOS (debajo de la sinopsis) ──────
+  (function(){
+    async function cargarDestacados(){
+      var grid = document.getElementById('destacados-grid');
+      if(!grid) return;
+      try{
+        var resp = await sb
+          .from('comentarios_publicos')
+          .select('*')
+          .not('prioridad_destacado', 'is', null)
+          .order('prioridad_destacado', { ascending: true })
+          .limit(3);
+        if(resp.error) throw resp.error;
+        var data = resp.data;
+        if(!data || data.length === 0){
+          document.getElementById('comentarios-destacados').style.display = 'none';
+          return;
+        }
+        data.forEach(function(c){
+          var card = document.createElement('div');
+          card.className = 'destacado-card';
+          card.innerHTML =
+            '<p class="c-autor">' + c.nombre_mostrado + '</p>' +
+            (c.cargo_mostrado ? '<p class="c-cargo">' + c.cargo_mostrado + '</p>' : '') +
+            '<p class="c-texto">“' + c.comentario + '”</p>';
+          grid.appendChild(card);
+        });
+      }catch(err){
+        console.error('Error cargando destacados', err);
+        var sec = document.getElementById('comentarios-destacados');
+        if (sec) sec.style.display = 'none';
+      }
+    }
+    cargarDestacados();
   })();
 
 </script>
