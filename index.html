@@ -1189,7 +1189,7 @@ function googleTranslateElementInit(){
   </div>
   </div><!-- /accordion-body circulo -->
 
-  <div class="comentarios-wrapper" id="comentarios-wrap">
+  <div class="comentarios-wrapper" id="voces-circulo">
     <p class="media-title">Voces del <em>Círculo</em></p>
     <p class="comentarios-intro">Un espacio para que quienes ya forman parte del Círculo de la Voz compartan su lectura de la novela. Cada comentario es revisado antes de publicarse, y solo se muestra tu nombre de pila junto con la inicial de tu apellido.</p>
 
@@ -1206,6 +1206,10 @@ function googleTranslateElementInit(){
         <div class="form-group">
           <label for="com-cargo">Cargo / Área de especialización (opcional)</label>
           <input type="text" id="com-cargo" name="cargo_o_area" placeholder="Ej. Periodista cultural, Directora de Humanidades...">
+        </div>
+        <div class="form-group" style="display:flex;align-items:flex-start;gap:10px;">
+          <input type="checkbox" id="com-autoriza-cargo" name="autoriza_mostrar_cargo" style="margin-top:4px;width:16px;height:16px;flex-shrink:0;">
+          <label for="com-autoriza-cargo" style="margin:0;font-size:14px;line-height:1.5;">Autorizo que se muestre mi cargo o área junto con mi comentario (si no la marcas, solo se mostrará tu nombre)</label>
         </div>
         <div class="form-group">
           <label for="comentario-textarea">Tu comentario sobre la novela *</label>
@@ -2049,6 +2053,7 @@ function googleTranslateElementInit(){
           nombre_completo: document.getElementById('com-nombre').value.trim(),
           correo: document.getElementById('com-correo').value.trim(),
           cargo_o_area: document.getElementById('com-cargo').value.trim() || null,
+          autoriza_mostrar_cargo: document.getElementById('com-autoriza-cargo').checked,
           comentario: textarea.value.trim()
         };
 
@@ -2072,7 +2077,7 @@ function googleTranslateElementInit(){
       if(!lista) return;
       try{
         var resp = await sb
-          .from('comentarios_circulo_publicos')
+          .from('comentarios_publicos')
           .select('*')
           .order('created_at', { ascending: false });
         if(resp.error) throw resp.error;
@@ -2087,7 +2092,7 @@ function googleTranslateElementInit(){
           var fecha = new Date(c.created_at).toLocaleDateString('es-MX', { year:'numeric', month:'long', day:'numeric' });
           card.innerHTML =
             '<p class="c-autor">' + c.nombre_mostrado + '</p>' +
-            (c.cargo_o_area ? '<p class="c-cargo">' + c.cargo_o_area + '</p>' : '') +
+            (c.cargo_mostrado ? '<p class="c-cargo">' + c.cargo_mostrado + '</p>' : '') +
             '<p class="c-texto">' + c.comentario + '</p>' +
             '<p class="c-fecha">' + fecha + '</p>';
           lista.appendChild(card);
