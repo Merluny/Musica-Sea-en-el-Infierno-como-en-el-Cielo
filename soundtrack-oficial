@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Soundtrack Oficial — Sea en el Infierno como en el Cielo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0d0817; --ink:#efe9f7; --ink-dim:#a99cc2;
+    --gold:#caa46c; --lavender:#a58fd0; --rule:rgba(255,255,255,.12);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; min-height:100vh; background:var(--bg); color:var(--ink);
+    font-family:'EB Garamond', serif;
+    display:flex; align-items:center; justify-content:center; padding:56px 20px;
+    background-image:radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,.5), transparent),
+                      radial-gradient(1px 1px at 70% 60%, rgba(255,255,255,.4), transparent),
+                      radial-gradient(1px 1px at 40% 80%, rgba(255,255,255,.3), transparent),
+                      radial-gradient(1px 1px at 90% 20%, rgba(255,255,255,.4), transparent);
+  }
+  .wrap{ max-width:460px; width:100%; text-align:center; }
+  .eyebrow{
+    font-family:'Cinzel',serif; font-size:12px; letter-spacing:.18em; text-transform:uppercase;
+    color:var(--lavender); margin-bottom:10px;
+  }
+  h1{
+    font-family:'Cinzel',serif; font-size:24px; letter-spacing:.04em; font-weight:600;
+    color:var(--ink); margin:0 0 22px;
+  }
+  .intro{
+    font-style:italic; color:var(--ink-dim); font-size:14px; line-height:1.75;
+    margin:0 0 40px;
+  }
+  .track-list{ display:flex; flex-direction:column; gap:32px; }
+  .track-card{ text-align:center; }
+  .track-cover{
+    width:min(280px, 74vw); border-radius:4px;
+    filter:drop-shadow(0 18px 40px rgba(0,0,0,.55)); margin-bottom:16px;
+  }
+  .track-title{
+    font-family:'Cinzel',serif; font-size:17px; letter-spacing:.03em;
+    color:var(--ink); margin-bottom:6px;
+  }
+  .track-note{ font-size:12px; color:var(--lavender); font-style:italic; margin-bottom:16px; }
+  .play-btn{
+    display:inline-flex; align-items:center; gap:10px; font-family:'Cinzel',serif;
+    font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:#0d0817;
+    background:linear-gradient(120deg,#caa46c,#8c6fb0); border:none; border-radius:2px;
+    padding:13px 24px; cursor:pointer; transition:transform .3s ease, box-shadow .3s ease;
+  }
+  .play-btn:hover{ transform:translateY(-2px); box-shadow:0 10px 24px rgba(180,140,200,.35); }
+  .divider{ width:60%; height:1px; background:var(--rule); margin:0 auto; }
+  .footer-mark{
+    margin-top:44px; font-family:'Cinzel',serif; font-size:10px; letter-spacing:.12em;
+    color:var(--rule); text-transform:uppercase;
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <p class="eyebrow">Original Book Soundtrack</p>
+    <h1>Soundtrack Oficial</h1>
+    <p class="intro">Este es el punto de entrada al soundtrack oficial de Sea en el Infierno como en el Cielo, que seguirá creciendo con el tiempo. Escucha las piezas ya disponibles.</p>
+
+    <div class="track-list">
+
+      <div class="track-card">
+        <img class="track-cover" src="la-misma-llama-cover.jpg" alt="La Misma Llama">
+        <p class="track-title">La Misma Llama</p>
+        <p class="track-note">Capítulos 110 · 114 · 120 · 124</p>
+        <button class="play-btn" id="play-1" type="button">
+          <span id="icon-1">▶</span><span id="label-1">Reproducir</span>
+        </button>
+        <audio id="audio-1" src="la-misma-llama.mp3" preload="none"></audio>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="track-card">
+        <img class="track-cover" src="the-weight-of-wonder-malakh-cover.jpg" alt="The Weight of Wonder - Malakh">
+        <p class="track-title">The Weight of Wonder — Malakh</p>
+        <button class="play-btn" id="play-2" type="button">
+          <span id="icon-2">▶</span><span id="label-2">Reproducir</span>
+        </button>
+        <audio id="audio-2" src="the-weight-of-wonder-malakh.mp3" preload="none"></audio>
+      </div>
+
+    </div>
+
+    <p class="footer-mark">Sea en el Infierno como en el Cielo · Fabiola Díaz</p>
+  </div>
+  <script>
+    (function(){
+      var ids = ['1','2'];
+      ids.forEach(function(n){
+        var btn = document.getElementById('play-'+n);
+        var audio = document.getElementById('audio-'+n);
+        var icon = document.getElementById('icon-'+n);
+        var label = document.getElementById('label-'+n);
+        if(!btn || !audio) return;
+        btn.addEventListener('click', function(){
+          // pausa cualquier otra pista que esté sonando
+          ids.forEach(function(m){
+            if(m !== n){
+              var other = document.getElementById('audio-'+m);
+              if(other && !other.paused){
+                other.pause();
+                document.getElementById('icon-'+m).textContent = '▶';
+                document.getElementById('label-'+m).textContent = 'Reproducir';
+              }
+            }
+          });
+          if(audio.paused){ audio.play(); icon.textContent = '❚❚'; label.textContent = 'Pausar'; }
+          else { audio.pause(); icon.textContent = '▶'; label.textContent = 'Reproducir'; }
+        });
+        audio.addEventListener('ended', function(){ icon.textContent = '▶'; label.textContent = 'Reproducir'; });
+      });
+    })();
+  </script>
+</body>
+</html>
