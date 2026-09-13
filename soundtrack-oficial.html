@@ -22,18 +22,22 @@
                       radial-gradient(1px 1px at 40% 80%, rgba(255,255,255,.3), transparent),
                       radial-gradient(1px 1px at 90% 20%, rgba(255,255,255,.4), transparent);
   }
-  .wrap{ max-width:460px; width:100%; text-align:center; }
+  .wrap{ max-width:480px; width:100%; text-align:center; }
   .eyebrow{
     font-family:'Cinzel',serif; font-size:12px; letter-spacing:.18em; text-transform:uppercase;
     color:var(--lavender); margin-bottom:10px;
   }
   h1{
     font-family:'Cinzel',serif; font-size:24px; letter-spacing:.04em; font-weight:600;
-    color:var(--ink); margin:0 0 22px;
+    color:var(--ink); margin:0 0 24px;
+  }
+  .desc{
+    font-size:15px; color:var(--ink-dim); line-height:1.85; text-align:left;
+    margin:0 0 20px;
   }
   .intro{
     font-style:italic; color:var(--ink-dim); font-size:14px; line-height:1.75;
-    margin:0 0 40px;
+    margin:0 0 40px; border-top:1px solid var(--rule); padding-top:20px;
   }
   .track-list{ display:flex; flex-direction:column; gap:32px; }
   .track-card{ text-align:center; }
@@ -64,18 +68,22 @@
   <div class="wrap">
     <p class="eyebrow">Original Book Soundtrack</p>
     <h1>Soundtrack Oficial</h1>
-    <p class="intro">Este es el punto de entrada al soundtrack oficial de Sea en el Infierno como en el Cielo, que seguirá creciendo con el tiempo. Escucha las piezas ya disponibles.</p>
+
+    <p class="desc">Sea en el Infierno como en el Cielo cuenta también con un soundtrack original, una experiencia sonora paralela a la obra literaria, concebida para acompañar la lectura. No es música de fondo. Algunas piezas son instrumentales que narran acontecimientos o estados emocionales de la historia. En otras, se incorpora letra puntual del propio libro y remiten a capítulos específicos.</p>
+    <p class="desc">La música describe personalidades de los personajes o momentos determinados de la historia. Las letras fueron tomadas del propio universo del libro; algunas cuentan con letra hasta en tres idiomas, por tratarse de una historia de vocación universal.</p>
+    <p class="desc">Fabiola Díaz estuvo a cargo de la dirección creativa y narrativa de la experiencia sonora. La producción musical está hecha con herramientas de inteligencia artificial.</p>
+
+    <p class="intro">Este es el punto de entrada al soundtrack oficial de Sea en el Infierno como en el Cielo. Paulatinamente se irán integrando canciones relacionadas al libro. Escucha aquí las piezas ya disponibles.</p>
 
     <div class="track-list">
 
       <div class="track-card">
-        <img class="track-cover" src="la-misma-llama-cover.jpg" alt="La Misma Llama">
-        <p class="track-title">La Misma Llama</p>
-        <p class="track-note">Capítulos 110 · 114 · 120 · 124</p>
+        <img class="track-cover" src="tema-principal-cover.jpg" alt="Sea en el Infierno como en el Cielo">
+        <p class="track-title">Sea en el Infierno como en el Cielo</p>
         <button class="play-btn" id="play-1" type="button">
           <span id="icon-1">▶</span><span id="label-1">Reproducir</span>
         </button>
-        <audio id="audio-1" src="la-misma-llama.mp3" preload="none"></audio>
+        <audio id="audio-1" src="tema-principal.mp3" preload="none"></audio>
       </div>
 
       <div class="divider"></div>
@@ -103,7 +111,6 @@
         var label = document.getElementById('label-'+n);
         if(!btn || !audio) return;
         btn.addEventListener('click', function(){
-          // pausa cualquier otra pista que esté sonando
           ids.forEach(function(m){
             if(m !== n){
               var other = document.getElementById('audio-'+m);
