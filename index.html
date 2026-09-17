@@ -872,6 +872,15 @@
     font-size:12px; color:var(--lavender); font-style:italic; margin-bottom:12px;
   }
   .comentario-card .c-texto{ font-size:16px; line-height:1.75; color:var(--ink); }
+  .c-texto.clamped{
+    display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical;
+    overflow:hidden;
+  }
+  .c-vermas{
+    display:none; margin-top:8px; background:none; border:none; cursor:pointer;
+    font-family:'Cinzel',serif; font-size:11px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--gold); text-decoration:underline; text-underline-offset:3px; padding:0;
+  }
   .comentario-card .c-fecha{
     font-size:11px; color:var(--ink-dim); margin-top:12px; letter-spacing:.04em;
   }
@@ -2024,6 +2033,30 @@ function googleTranslateElementInit(){
       });
     }
   });
+  // Compartida entre ambos bloques de comentarios (destacados y lista completa)
+  function crearTextoExpandible(texto){
+    var wrap = document.createElement('div');
+    var p = document.createElement('p');
+    p.className = 'c-texto clamped';
+    p.textContent = texto;
+    var btn = document.createElement('button');
+    btn.className = 'c-vermas';
+    btn.type = 'button';
+    btn.textContent = 'Ver más';
+    wrap.appendChild(p);
+    wrap.appendChild(btn);
+    btn.addEventListener('click', function(){
+      var expandido = p.classList.toggle('clamped') === false;
+      btn.textContent = expandido ? 'Ver menos' : 'Ver más';
+    });
+    requestAnimationFrame(function(){
+      if(p.scrollHeight > p.clientHeight + 2){
+        btn.style.display = 'inline-block';
+      }
+    });
+    return wrap;
+  }
+
   // ── COMENTARIOS DEL CÍRCULO DE LA VOZ ──────────────────
   (function(){
     var MAX_WORDS = 300;
@@ -2104,9 +2137,12 @@ function googleTranslateElementInit(){
           var fecha = new Date(c.created_at).toLocaleDateString('es-MX', { year:'numeric', month:'long', day:'numeric' });
           card.innerHTML =
             '<p class="c-autor">' + c.nombre_mostrado + '</p>' +
-            (c.cargo_mostrado ? '<p class="c-cargo">' + c.cargo_mostrado + '</p>' : '') +
-            '<p class="c-texto">' + c.comentario + '</p>' +
-            '<p class="c-fecha">' + fecha + '</p>';
+            (c.cargo_mostrado ? '<p class="c-cargo">' + c.cargo_mostrado + '</p>' : '');
+          card.appendChild(crearTextoExpandible(c.comentario));
+          var fechaEl = document.createElement('p');
+          fechaEl.className = 'c-fecha';
+          fechaEl.textContent = fecha;
+          card.appendChild(fechaEl);
           lista.appendChild(card);
         });
       }catch(err){
@@ -2139,8 +2175,8 @@ function googleTranslateElementInit(){
           card.className = 'destacado-card';
           card.innerHTML =
             '<p class="c-autor">' + c.nombre_mostrado + '</p>' +
-            (c.cargo_mostrado ? '<p class="c-cargo">' + c.cargo_mostrado + '</p>' : '') +
-            '<p class="c-texto">“' + c.comentario + '”</p>';
+            (c.cargo_mostrado ? '<p class="c-cargo">' + c.cargo_mostrado + '</p>' : '');
+          card.appendChild(crearTextoExpandible('“' + c.comentario + '”'));
           grid.appendChild(card);
         });
       }catch(err){
