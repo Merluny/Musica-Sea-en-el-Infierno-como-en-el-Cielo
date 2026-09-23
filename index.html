@@ -558,29 +558,6 @@
   }
   .whatsapp-group input{flex:1;}
 
-  .manuscrito-destacado{
-    display:none;
-    border:1px solid var(--gold);
-    border-radius:4px;
-    padding:26px 24px;
-    margin:24px 0;
-    background:rgba(201,168,122,0.08);
-  }
-  .manuscrito-destacado.visible{display:block;}
-  .manuscrito-destacado .titulo{
-    font-family:'Cinzel',serif;
-    font-size:22px;
-    letter-spacing:.06em;
-    color:var(--gold);
-    text-align:center;
-    margin-bottom:18px;
-  }
-  .manuscrito-destacado p{
-    font-size:18px;
-    color:var(--ink);
-    margin-bottom:12px;
-    line-height:1.85;
-  }
 
 
   /* ── SITE HEADER ─────────────────────────── */
@@ -616,16 +593,7 @@
   body{padding-top:92px;}
   @media(max-width:480px){body{padding-top:86px;}}
 
-  /* ── COUNTDOWN ───────────────────────────── */
-  .countdown-wrap{margin-top:16px;text-align:center;}
-  .countdown{display:inline-flex;gap:4px;align-items:flex-start;}
-  .cd-unit{text-align:center;min-width:52px;}
-  .cd-num{display:block;font-family:'Cinzel',serif;font-size:28px;font-weight:500;background:linear-gradient(90deg,#c9a87a,#b39bd6);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.1;}
-  .cd-lbl{display:block;font-family:'Cinzel',serif;font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:rgba(201,168,122,.6);margin-top:2px;}
-  .cd-sep{font-family:'Cinzel',serif;font-size:22px;color:rgba(201,168,122,.4);padding:0 1px;align-self:flex-start;padding-top:2px;}
-  .cd-lanzado{display:none;font-family:'Cinzel',serif;font-size:12px;letter-spacing:.1em;color:var(--gold);text-transform:uppercase;}
-
-  /* ── CARGO / ROL ─────────────────────────── */
+/* ── CARGO / ROL ─────────────────────────── */
   .cargo-req{color:var(--gold);opacity:0;transition:opacity .2s;}
   #cargo-group.requerido .cargo-req{opacity:1;}
 
@@ -905,15 +873,42 @@
   .destacado-card .c-texto{ font-size:15px; line-height:1.7; color:var(--ink); flex-grow:1; }
 
   /* ---------- OFFSET DE ANCLAS PARA ENCABEZADO FIJO ---------- */
-  #sinopsis, #comentarios-destacados, #circulo-la-voz, #prensa, #editorial-rights, #preregistro,
+  #comprar, #sinopsis, #comentarios-destacados, #circulo-la-voz, #prensa, #editorial-rights, #preregistro,
   .comentarios-wrapper[id]{
     scroll-margin-top: 100px;
   }
   @media(max-width:480px){
-    #sinopsis, #comentarios-destacados, #circulo-la-voz, #prensa, #editorial-rights, #preregistro,
+    #comprar, #sinopsis, #comentarios-destacados, #circulo-la-voz, #prensa, #editorial-rights, #preregistro,
     .comentarios-wrapper[id]{
       scroll-margin-top: 90px;
     }
+  }
+
+  /* ---------- MÓDULO DE COMPRA ---------- */
+  .buy-eyebrow{
+    font-family:'Cinzel',serif; font-size:14px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--gold); text-align:center; margin:0 0 22px;
+  }
+  .buy-block{ margin-bottom:30px; text-align:center; }
+  .buy-block h3{
+    font-family:'Cinzel',serif; font-size:15px; letter-spacing:.06em; color:var(--ink);
+    margin-bottom:6px; font-weight:500;
+  }
+  .buy-note{ font-size:13px; color:var(--lavender); font-style:italic; margin-bottom:14px; }
+  .buy-badge{
+    display:inline-block; font-size:12px; color:var(--ink-dim); border:1px solid var(--rule);
+    border-radius:20px; padding:5px 14px; margin-bottom:14px;
+  }
+  .buy-btns{ display:flex; gap:12px; flex-wrap:wrap; justify-content:center; align-items:center; }
+  .buy-select{
+    background:rgba(255,255,255,0.04); border:1px solid var(--rule); color:var(--ink);
+    font-family:'EB Garamond',serif; font-size:15px; padding:11px 14px; border-radius:2px;
+    outline:none; cursor:pointer;
+  }
+  .buy-select option{ background:var(--void); color:var(--ink); }
+  .btn.disabled{
+    border:1px solid var(--rule); color:var(--ink-dim); opacity:.6; cursor:default;
+    pointer-events:none;
   }
 
 </style>
@@ -971,6 +966,7 @@ function googleTranslateElementInit(){
   </div>
   <nav class="site-nav" aria-label="Navegación principal">
     <ul class="nav-links" id="nav-links">
+      <li><a href="#comprar">Comprar</a></li>
       <li><a href="#sinopsis">Sinopsis</a></li>
       <li><a href="#circulo-la-voz">Círculo de la Voz</a></li>
       <li><a href="#prensa">Sala de Prensa</a></li>
@@ -1008,19 +1004,57 @@ function googleTranslateElementInit(){
   </p>
   <p class="time-detail">3:33 ¡Es hora!</p>
   <div class="ctas" style="flex-direction:column;align-items:center;gap:14px;">
-    <a class="btn primary" href="#preregistro">Adquiérelo en Amazon</a>
-    <div class="countdown" id="countdown">
-      <div class="cd-unit"><span class="cd-num" id="cd-days">--</span><span class="cd-lbl">días</span></div>
-      <span class="cd-sep">:</span>
-      <div class="cd-unit"><span class="cd-num" id="cd-hours">--</span><span class="cd-lbl">horas</span></div>
-      <span class="cd-sep">:</span>
-      <div class="cd-unit"><span class="cd-num" id="cd-mins">--</span><span class="cd-lbl">min</span></div>
-    </div>
-    <p class="cd-lanzado" id="cd-lanzado">¡Ya disponible en Amazon! 🎉</p>
-    <button id="btn-capitulos" type="button" style="background:none;border:none;cursor:pointer;font-family:'Cinzel',serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(241,236,226,.55);text-decoration:underline;text-underline-offset:4px;padding:4px 0;transition:color .2s;">Un acercamiento al libro</button>
+    <p class="buy-eyebrow">✦ Ya disponible en Amazon ✦</p>
+    <a class="btn primary" href="#comprar">Ver dónde comprarlo</a>
   </div>
   <div class="scrollcue"></div>
 </section>
+
+<section id="comprar" class="wide reveal" style="text-align:center;">
+  <p class="eyebrow">Disponible ahora</p>
+  <h2>Consigue tu <em>ejemplar</em></h2>
+
+  <div class="buy-block">
+    <h3>📱 Edición digital — eBook Kindle</h3>
+    <p class="buy-note">Incluido en Kindle Unlimited</p>
+    <div class="buy-btns">
+      <a class="btn primary" href="https://www.amazon.com.mx/dp/B0HKQC6J8M" target="_blank" rel="noopener">Comprar en México</a>
+      <a class="btn secondary" href="https://www.amazon.com/dp/B0HKQC6J8M" target="_blank" rel="noopener">EE. UU. / Internacional</a>
+    </div>
+  </div>
+
+  <div class="buy-block">
+    <h3>📖 Pasta blanda</h3>
+    <p class="buy-badge">No disponible para envío a México</p>
+    <div class="buy-btns">
+      <a class="btn primary" href="https://www.amazon.com/dp/B0HKQ1DQTR" target="_blank" rel="noopener">Estados Unidos</a>
+      <a class="btn secondary" href="https://www.amazon.es/dp/B0HKQ1DQTR" target="_blank" rel="noopener">España</a>
+      <a class="btn secondary" href="https://www.amazon.fr/dp/B0HKQ1DQTR" target="_blank" rel="noopener">Francia</a>
+    </div>
+    <div style="margin-top:14px;">
+      <select class="buy-select" id="pb-otros-paises" aria-label="Otros países para pasta blanda">
+        <option value="">Otros países…</option>
+            <option value="https://www.amazon.co.uk/dp/B0HKQ1DQTR">Reino Unido</option>
+            <option value="https://www.amazon.de/dp/B0HKQ1DQTR">Alemania</option>
+            <option value="https://www.amazon.it/dp/B0HKQ1DQTR">Italia</option>
+            <option value="https://www.amazon.ca/dp/B0HKQ1DQTR">Canadá</option>
+            <option value="https://www.amazon.com.au/dp/B0HKQ1DQTR">Australia</option>
+            <option value="https://www.amazon.co.jp/dp/B0HKQ1DQTR">Japón</option>
+            <option value="https://www.amazon.nl/dp/B0HKQ1DQTR">Países Bajos</option>
+            <option value="https://www.amazon.se/dp/B0HKQ1DQTR">Suecia</option>
+            <option value="https://www.amazon.pl/dp/B0HKQ1DQTR">Polonia</option>
+            <option value="https://www.amazon.com.be/dp/B0HKQ1DQTR">Bélgica</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="buy-block">
+    <h3>📕 Pasta dura — edición especial de colección</h3>
+    <span class="btn disabled">Disponible a partir del 25 de septiembre</span>
+  </div>
+</section>
+
+<div class="divider"></div>
 
 <!-- ============ SINOPSIS ============ -->
 <section id="sinopsis" class="sinopsis reveal">
@@ -1047,8 +1081,8 @@ function googleTranslateElementInit(){
 
 <!-- ============ PREREGISTRO / QR ============ -->
 <section id="preregistro" class="wide reveal" style="text-align:center;">
-  <p class="eyebrow">¡Anticípate al lanzamiento el 25 de septiembre de 2026!</p>
-  <h2>Preregistro para el <em>libro</em></h2>
+  <p class="eyebrow">Mantente cerca de la historia</p>
+  <h2>Recibe noticias de la <em>autora</em></h2>
   
   <form id="prereg-form" style="max-width:480px;margin:0 auto 24px;text-align:left;">
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
@@ -1074,18 +1108,14 @@ function googleTranslateElementInit(){
     </div>
     <div style="margin-bottom:16px;display:flex;flex-direction:column;gap:10px;">
       <div style="display:flex;gap:9px;align-items:flex-start;">
-        <input type="checkbox" id="pr-extracto" style="width:auto;margin-top:3px;">
-        <label for="pr-extracto" style="text-transform:none;letter-spacing:0;font-size:14px;color:var(--ink-dim);">Deseo recibir el extracto el <strong style="color:var(--gold);">18 de septiembre</strong></label>
-      </div>
-      <div style="display:flex;gap:9px;align-items:flex-start;">
         <input type="checkbox" id="pr-novedades" checked style="width:auto;margin-top:3px;">
-        <label for="pr-novedades" style="text-transform:none;letter-spacing:0;font-size:14px;color:var(--ink-dim);">Deseo recibir novedades sobre el lanzamiento del <strong style="color:var(--gold);">25 de septiembre</strong></label>
+        <label for="pr-novedades" style="text-transform:none;letter-spacing:0;font-size:14px;color:var(--ink-dim);">Deseo recibir novedades de la autora, futuros libros y eventos</label>
       </div>
     </div>
     <button type="button" id="prereg-btn" class="btn primary" style="width:100%;border:none;cursor:pointer;">Registrarme ahora</button>
   </form>
   <div id="prereg-success">
-    <p>✦ Tu preregistro ha sido recibido correctamente. Si no encuentras nuestro correo en tu bandeja principal, revisa las carpetas de Promociones, Notificaciones o Spam. ✦</p>
+    <p>✦ Gracias por sumarte a las noticias de Fabiola Díaz. Si no encuentras nuestro correo en tu bandeja principal, revisa las carpetas de Promociones, Notificaciones o Spam. ✦</p>
   </div><!-- ============ SECCIÓN: CÍRCULO DE "LA VOZ" ============ -->
 <section id="circulo-la-voz" class="wide reveal">
   <div class="divider"></div>
@@ -1101,7 +1131,7 @@ function googleTranslateElementInit(){
   <button class="accordion-trigger" id="acc-circulo" aria-expanded="false" onclick="toggleAccordion('acc-circulo','body-circulo')">
     Abrir formulario de solicitud <span class="acc-arrow">▼</span>
   </button>
-  <p class="accordion-preview">Manuscrito Digital · Dossier Editorial · Entrevista Autora · Boletines · Alianza Cultural</p>
+  <p class="accordion-preview">Dossier Editorial · Entrevista Autora · Boletines · Alianza Cultural</p>
   <div class="accordion-body" id="body-circulo">
   <div class="form-wrapper" id="circulo-form-wrap" style="margin-top:36px;">
     <p class="media-title">Formulario de <em>Acreditación y Prelectura</em></p>
@@ -1156,10 +1186,6 @@ function googleTranslateElementInit(){
 
         <div class="card-options">
           <div class="card-option">
-            <input type="checkbox" id="cd-opt-manuscrito" name="manuscrito_digital">
-            <label for="cd-opt-manuscrito"><span class="emoji">📖</span> Manuscrito Digital</label>
-          </div>
-          <div class="card-option">
             <input type="checkbox" id="cd-opt-dossier" name="dossier_editorial">
             <label for="cd-opt-dossier"><span class="emoji">📁</span> Dossier Editorial</label>
           </div>
@@ -1178,29 +1204,13 @@ function googleTranslateElementInit(){
         </div>
       </div>
 
-      <div class="manuscrito-destacado" id="manuscrito-destacado">
-        <p class="titulo">✨ Acceso Exclusivo: Manuscrito Digital de Lectura Anticipada</p>
-        <p>
-          Este manuscrito se comparte únicamente para lectura anticipada antes de su publicación oficial
-          el 25 de septiembre de 2026. Te lo compartimos con tiempo para que leas sin prisas y tu opinión
-          pueda sumarse a la difusión del lanzamiento.
-        </p>
-        <p style="margin-top:14px;">
-          Te recordamos que se trata de un ejemplar de cortesía exclusivo protegido por derechos de autor,
-          por lo que su distribución, copia o reventa no están permitidas. Al solicitar este manuscrito,
-          te conviertes en guardián de su historia: agradecemos tu complicidad para mantener el misterio
-          intacto y no revelar los secretos ni el final de la trama a otros lectores, para que cada quien
-          pueda vivirla con la misma emoción y sorpresa con que tú la vivirás.
-        </p>
-      </div>
-
-      <div class="form-group">
+<div class="form-group">
         <label for="cd-mensaje">Mensaje o Motivación * <span style="text-transform:none; letter-spacing:0; color:var(--ink-dim); font-size:12px;">(cuéntanos sobre tu interés en la obra)</span></label>
         <textarea id="cd-mensaje" name="mensaje" rows="3" placeholder="Escribe tu mensaje aquí" required></textarea>
       </div>
 
       <button type="submit" class="btn primary" style="width:100%;margin-top:24px;border:none;cursor:pointer;">Enviar Solicitud</button>
-      <div class="success-msg" id="circulo-success"><p style="color:var(--gold);font-family:Cinzel,serif;font-size:14px;letter-spacing:.08em;margin-bottom:14px;">✦ El Dossier Editorial será enviado a tu correo electrónico a la brevedad.</p>
+      <div class="success-msg" id="circulo-success"><p style="color:var(--gold);font-family:Cinzel,serif;font-size:14px;letter-spacing:.08em;margin-bottom:14px;">✦ Tu solicitud fue recibida correctamente.</p>
         ¡Gracias por sumarte! Revisaremos tu solicitud y te contactaremos a la brevedad.
       </div>
       <p id="circulo-error" style="display:none; text-align:center; color:#e45858; margin-top:14px; font-size:14px;">
@@ -1280,13 +1290,13 @@ function googleTranslateElementInit(){
     <dl>
       <dt>Título</dt><dd>Sea en el Infierno como en el Cielo</dd>
       <dt>Género</dt><dd>Thriller metafísico · Suspenso psicológico · Ficción Visionaria</dd>
-      <dt>Extensión</dt><dd>142,924 palabras · 133 capítulos · 10 interludios</dd>
+      <dt>Extensión</dt><dd>142,057 palabras · 133 capítulos · 10 interludios</dd>
       <dt>Formatos</dt><dd>Pasta blanda y pasta dura, 6×9" (Amazon.com) · ePub a color para tablet/celular · ePub B/N para Kindle</dd>
       <dt>Autora</dt><dd>Fabiola Díaz</dd>
       <dt>ISBN (pasta blanda)</dt><dd>979-8189317804</dd>
       <dt>ISBN (pasta dura)</dt><dd>979-8194720590</dd>
       <dt>Páginas</dt><dd>468 páginas</dd>
-      <dt>Lanzamiento</dt><dd>25 de septiembre, 2026</dd>
+      <dt>Lanzamiento</dt><dd>22 de septiembre, 2026 (eBook y pasta blanda) · 25 de septiembre (pasta dura)</dd>
     </dl>
   </div>
 </section>
@@ -1310,7 +1320,7 @@ function googleTranslateElementInit(){
 
   <div class="faq-item">
     <button class="faq-q"><span>¿Cuándo estará disponible la edición física?</span><span class="plus">+</span></button>
-    <div class="faq-a"><p>La maquetación actual está diseñada específicamente para las directrices de Amazon KDP. El lanzamiento en tapa blanda, tapa dura y en formato digital será el <strong>25 de septiembre de 2026</strong>. La edición impresa usa el formato 6 × 9 pulgadas y está disponible en pasta blanda y pasta dura en Amazon.com, con envíos a todo el mundo. En Amazon México (amazon.com.mx) encontrarás la edición digital ePub; las ediciones impresas también pueden adquirirse ahí a través de Amazon.com, con costos de envío adicionales. La edición ePub se visualiza a color en tablets, celulares, la app de Kindle, Libros en Mac, iPhone y Android, y en blanco y negro en dispositivos Kindle de tinta electrónica.</p></div>
+    <div class="faq-a"><p>El eBook y la edición en pasta blanda ya están disponibles en Amazon. La edición especial de colección en pasta dura llega el <strong>25 de septiembre de 2026</strong>. La edición impresa usa el formato 6 × 9 pulgadas. La pasta blanda se consigue en Amazon Estados Unidos, España, Francia y otros mercados internacionales, pero no tiene envío a México. El eBook sí está disponible en Amazon México, incluido en Kindle Unlimited. La edición digital se visualiza a color en tablets, celulares, la app de Kindle, Libros en Mac, iPhone y Android, y en blanco y negro en dispositivos Kindle de tinta electrónica.</p></div>
   </div>
 </section>
 
@@ -1322,17 +1332,16 @@ function googleTranslateElementInit(){
 
   <div class="prensa-card">
     <h3>La artista visual mexicana Fabiola Díaz debuta en las letras con un monumental thriller de ficción metafísica.</h3>
-    <p class="prensa-meta">Boletín de prensa — se envía 48 horas antes del lanzamiento, 25 de septiembre, 2026</p>
+    <p class="prensa-meta">Boletín de prensa — disponible para descarga inmediata</p>
     <p>La reconocida comunicóloga y artista plástica Fabiola Díaz, creadora del Curvismo, el arte luminiscente y el realismo fantástico, anuncia el lanzamiento de su primera obra literaria titulada <em>Sea en el Infierno como en el Cielo</em>. Tras años de explorar la transformación de la luz y el volumen en sus pinto-esculturas, con obra presente en colecciones de Europa y Estados Unidos, Díaz traslada su agudo sentido de la narrativa visual al terreno de las letras. "Para mí la escritura y la plástica comparten mi necesidad de mostrar lo invisible e intangible a través de contrastes, tensión y movimiento, a veces en formas y colores y otras en letras", afirma la autora.</p>
   </div>
 
   <div class="prensa-card">
-    <h3>Kit de prensa</h3>
-    <p class="prensa-meta">Disponible el 20 de septiembre de 2026</p>
-    <p>Portada en alta resolución · Sinopsis ampliada · Boletín de prensa · Semblanza de la autora.</p>
-    <p style="font-size:15px;color:var(--ink-dim);margin-top:10px;">Regístrate para recibir toda la información antes del lanzamiento oficial del <strong>25 de septiembre de 2026</strong>.</p>
-    <p style="text-align:center; margin-top:24px;">
-      <a href="#circulo-la-voz" class="btn primary" id="btn-acceso-anticipado">Solicitar Acceso Anticipado</a>
+    <h3>Descargas para prensa</h3>
+    <p>Boletín de prensa completo y anexo editorial con las claves de lectura de la novela.</p>
+    <p style="text-align:center; margin-top:24px; display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
+      <a href="/prensa/boletin-sea-en-el-infierno.pdf" class="btn primary" target="_blank" rel="noopener">Descargar Boletín (PDF)</a>
+      <a href="/prensa/anexo-sea-en-el-infierno.pdf" class="btn secondary" target="_blank" rel="noopener">Descargar Anexo Editorial (PDF)</a>
     </p>
   </div>
 </section>
@@ -1362,7 +1371,7 @@ function googleTranslateElementInit(){
           <tr><td>Author</td><td>Fabiola Díaz</td></tr>
           <tr><td>Status</td><td>Complete manuscript</td></tr>
           <tr><td>Genre</td><td>Visionary Fiction / Metaphysical Thriller / Fantastic Realism</td></tr>
-          <tr><td>Word Count</td><td>142,924 words</td></tr>
+          <tr><td>Word Count</td><td>142,057 words</td></tr>
           <tr><td>Original Language</td><td>Spanish</td></tr>
           <tr><td>Publication Status</td><td>Unpublished</td></tr>
           <tr><td>Representation</td><td>Independent</td></tr>
@@ -1491,29 +1500,6 @@ function googleTranslateElementInit(){
 </section>
 
 
-<!-- ============ MODAL CAPÍTULOS ============ -->
-<div class="modal-overlay" id="modal-capitulos" role="dialog" aria-modal="true">
-  <div class="modal-box">
-    <button class="modal-close" id="modal-close" aria-label="Cerrar">✕</button>
-    <h3>El primer encuentro</h3>
-    <div id="caps-locked" class="caps-locked">
-      <p>Recibirás tu extracto el <strong>18 de septiembre de 2026</strong>.</p>
-      <p style="margin-top:10px;">Completa tu preregistro para recibirlo.</p>
-      <div style="text-align:center;margin-top:20px;">
-        <a href="#preregistro" class="btn primary" onclick="document.getElementById('modal-capitulos').classList.remove('open')">Ir al preregistro</a>
-      </div>
-    </div>
-    <div id="caps-form-wrap" style="display:none;">
-      <p style="color:var(--ink-dim);font-size:15px;margin-bottom:16px;">Ingresa tu correo y recibirás los capítulos en PDF.</p>
-      <form id="caps-form">
-        <div class="form-group"><label for="caps-nombre">Nombre</label><input type="text" id="caps-nombre" required placeholder="Tu nombre"></div>
-        <div class="form-group"><label for="caps-email">Correo electrónico</label><input type="email" id="caps-email" required placeholder="tu@correo.com"></div>
-        <button type="button" id="caps-btn-send" class="btn primary" style="width:100%;border:none;cursor:pointer;margin-top:8px;">Solicitar capítulos</button>
-      </form>
-    </div>
-  </div>
-</div>
-
 <footer>
   <div class="logo-editorial">
     <div class="logo-editorial-line"></div>
@@ -1525,7 +1511,7 @@ function googleTranslateElementInit(){
     <div class="logo-editorial-line r"></div>
   </div>
   <p class="firma">Fabiola Díaz</p>
-  <p class="copyright">© Fabiola Díaz. Todos los derechos reservados.</p>
+  <p class="copyright">© 2026 Fabiola Díaz. Todos los derechos reservados.</p>
   <p>Obra registrada ante las instancias de propiedad literaria correspondientes.</p>
 </footer>
 
@@ -1578,6 +1564,15 @@ function googleTranslateElementInit(){
   }
 
 
+  // ── SELECTOR OTROS PAÍSES (pasta blanda) ──────────────────
+  (function(){
+    var sel = document.getElementById('pb-otros-paises');
+    if(!sel) return;
+    sel.addEventListener('change', function(){
+      if(sel.value){ window.open(sel.value, '_blank', 'noopener'); sel.value=''; }
+    });
+  })();
+
   // ── BOTÓN VOLVER ARRIBA ───────────────────────────────────
   (function(){
     var btt = document.getElementById('back-to-top');
@@ -1608,7 +1603,7 @@ function googleTranslateElementInit(){
 
   // ── ACTIVE NAV ON SCROLL ──────────────────────────────────
   (function(){
-    var ids=['sinopsis','circulo-la-voz','prensa','editorial-rights'];
+    var ids=['comprar','sinopsis','circulo-la-voz','prensa','editorial-rights'];
     window.addEventListener('scroll',function(){
       var cur='';
       ids.forEach(function(id){
@@ -1621,59 +1616,7 @@ function googleTranslateElementInit(){
     },{passive:true});
   })();
 
-  // ── COUNTDOWN 22 SEP 2026 00:00 CDMX ─────────────────────
-  (function(){
-    var launch=new Date('2026-09-25T06:00:00Z');
-    var wrap=document.getElementById('countdown');
-    var lanzado=document.getElementById('cd-lanzado');
-    function tick(){
-      var diff=launch-new Date();
-      if(diff<=0){
-        if(wrap) wrap.style.display='none';
-        if(lanzado) lanzado.style.display='block';
-        return;
-      }
-      var d=Math.floor(diff/864e5);
-      var h=Math.floor((diff%864e5)/36e5);
-      var m=Math.floor((diff%36e5)/6e4);
-      function set(id,v){var el=document.getElementById(id);if(el)el.textContent=String(v).padStart(2,'0');}
-      set('cd-days',d); set('cd-hours',h); set('cd-mins',m);
-    }
-    tick(); setInterval(tick,30000);
-  })();
-
-  // ── MODAL CAPÍTULOS ───────────────────────────────────────
-  (function(){
-    var btn=document.getElementById('btn-capitulos');
-    var overlay=document.getElementById('modal-capitulos');
-    var closeBtn=document.getElementById('modal-close');
-    if(!btn||!overlay) return;
-    btn.addEventListener('click',function(){ overlay.classList.add('open'); });
-    if(closeBtn) closeBtn.addEventListener('click',function(){ overlay.classList.remove('open'); });
-    overlay.addEventListener('click',function(e){ if(e.target===overlay) overlay.classList.remove('open'); });
-    var capsRelease=new Date('2026-09-18T06:00:00Z'); // 00:00 CDMX
-    if(new Date()>=capsRelease){
-      var locked=document.getElementById('caps-locked');
-      var formWrap=document.getElementById('caps-form-wrap');
-      if(locked) locked.style.display='none';
-      if(formWrap) formWrap.style.display='block';
-    }
-    var capsForm=document.getElementById('caps-form');
-    if(capsForm && typeof sb!=='undefined'){
-      capsForm.addEventListener('submit',async function(e){
-        e.preventDefault();
-        var nombre=document.getElementById('caps-nombre').value;
-        var email=document.getElementById('caps-email').value;
-        if(!email) return;
-        await sb.from('solicitudes_capitulos').insert([{nombre:nombre,email:email}]);
-        capsForm.innerHTML='<p style="color:var(--gold);font-family:Cinzel,serif;font-size:13px;text-align:center;letter-spacing:.08em;">✦ Solicitud recibida. Recibirás los capítulos pronto. ✦</p>';
-
-        // Notificación por email
-      });
-    }
-  })();
-
-  // ── CARGO / ROL condicional ───────────────────────────────
+// ── CARGO / ROL condicional ───────────────────────────────
   (function(){
     var proCats=['cd-opt-dossier','cd-opt-entrevista','cd-opt-boletines','cd-opt-alianza'];
     var cargoGroup=document.getElementById('cargo-group');
@@ -1801,17 +1744,6 @@ function googleTranslateElementInit(){
       });
     }
 
-    // Texto dinámico: se muestra en grande al activar la tarjeta "Manuscrito Digital".
-    const chkManuscrito = document.getElementById('cd-opt-manuscrito');
-    const bloqueManuscrito = document.getElementById('manuscrito-destacado');
-    if (chkManuscrito && bloqueManuscrito) {
-      chkManuscrito.addEventListener('change', () => {
-        bloqueManuscrito.classList.toggle('visible', chkManuscrito.checked);
-      });
-    }
-
-    // El Manuscrito Digital está disponible sin fecha límite de solicitud.
-
     // Envío del formulario directo a Supabase (tabla circulo_la_voz)
     const circuloForm = document.getElementById('circulo-form');
     const circuloSuccess = document.getElementById('circulo-success');
@@ -1832,7 +1764,6 @@ function googleTranslateElementInit(){
           email_alterno: document.getElementById('cd-email-alt').value || null,
           whatsapp: whatsapp,
           medio: document.getElementById('cd-medio').value || null,
-          manuscrito_digital: document.getElementById('cd-opt-manuscrito').checked,
           dossier_editorial: document.getElementById('cd-opt-dossier').checked,
           entrevista_autora: document.getElementById('cd-opt-entrevista').checked,
           boletines_alertas: document.getElementById('cd-opt-boletines').checked,
@@ -1842,7 +1773,7 @@ function googleTranslateElementInit(){
         };
 
         const algunaSeleccionada =
-          registro.manuscrito_digital || registro.dossier_editorial ||
+          registro.dossier_editorial ||
           registro.entrevista_autora || registro.boletines_alertas || registro.alianza_cultural;
 
         // Validar cargo/rol para categorías profesionales
@@ -1876,7 +1807,7 @@ function googleTranslateElementInit(){
           '<p style="font-family:Cinzel,serif;font-size:17px;color:var(--gold);letter-spacing:.05em;margin-bottom:20px;">Bienvenido al Círculo de la Voz, ' + primerNombre + '.</p>' +
           '<p style="font-size:17px;color:var(--ink);line-height:1.85;margin-bottom:20px;text-align:left;">' +
             'He recibido tus respuestas y quiero agradecerte el tiempo, la sensibilidad y la atención que les dedicaste. Tu voz y tu perspectiva son profundamente valiosas para mí.<br><br>' +
-            'Desde este momento formas parte de un espacio íntimo que descubrirá fragmentos, secretos y detalles de la novela antes de su lanzamiento oficial. Me emociona que formes parte de este viaje.' +
+            'Desde este momento formas parte de un espacio íntimo que seguirá de cerca las novedades y conversaciones sobre esta historia. Me emociona que formes parte de este viaje.' +
           '</p>' +
           '<p style="font-family:Cinzel,serif;font-size:13px;color:var(--lavender);letter-spacing:.1em;margin-bottom:20px;">3:33 · Es hora.</p>' +
           '<img src="' + logoSrc + '" alt="" style="width:56px;height:56px;object-fit:contain;filter:drop-shadow(0 0 6px rgba(179,155,214,.4));margin:8px auto 4px;display:block;">' +
@@ -1887,7 +1818,6 @@ function googleTranslateElementInit(){
 
         // Notificación por email
         var cats = [];
-        if(registro.manuscrito_digital) cats.push('Manuscrito Digital');
         if(registro.dossier_editorial)  cats.push('Dossier Editorial');
         if(registro.entrevista_autora)  cats.push('Entrevista Autora');
         if(registro.boletines_alertas)  cats.push('Boletines y Alertas');
@@ -1915,19 +1845,18 @@ function googleTranslateElementInit(){
           nombre:nombre, email:email,
           pais:(document.getElementById('pr-pais')||{value:''}).value||null,
           como_se_entero:(document.getElementById('pr-como')||{value:''}).value||null,
-          quiere_extracto:!!(document.getElementById('pr-extracto')||{}).checked,
-          quiere_novedades_lanzamiento:!!(document.getElementById('pr-novedades')||{}).checked
+            quiere_novedades_lanzamiento:!!(document.getElementById('pr-novedades')||{}).checked
         }]);
         if(r.error) throw r.error;
         // Mostrar confirmación
         var pnombre = (document.getElementById('pr-nombre').value||'').trim().split(' ')[0];
         form.innerHTML = '<div style="text-align:center;padding:32px 16px;max-width:480px;margin:0 auto;">' +
           '<p style="font-size:28px;margin-bottom:16px;">🪶</p>' +
-          '<p style="font-family:Cinzel,serif;font-size:17px;color:var(--gold);letter-spacing:.05em;margin-bottom:20px;">¡Gracias por sumarte, ' + pnombre + '!</p>' +
+          '<p style="font-family:Cinzel,serif;font-size:17px;color:var(--gold);letter-spacing:.05em;margin-bottom:20px;">¡Bienvenido, ' + pnombre + '!</p>' +
           '<p style="font-size:17px;color:var(--ink);line-height:1.85;margin-bottom:20px;text-align:left;">' +
-            'Tu preregistro ha sido recibido correctamente.<br><br>' +
+            'Gracias por sumarte a las noticias de Fabiola Díaz.<br><br>' +
             'Si no encuentras nuestro correo en tu bandeja principal, revisa las carpetas de Promociones, Notificaciones o Spam.<br><br>' +
-            'Me alegra compartir contigo que <em>Sea en el Infierno como en el Cielo</em> se lanzará oficialmente el <strong style=\'color:var(--gold)\'>25 de septiembre</strong>.' +
+            '<em>Sea en el Infierno como en el Cielo</em> ya está disponible en Amazon — gracias por acompañar esta historia.' +
           '</p>' +
           '<img src="' + logoSrc + '" alt="" style="width:56px;height:56px;object-fit:contain;filter:drop-shadow(0 0 6px rgba(179,155,214,.4));margin:8px auto 4px;display:block;">' +
           '<p style="font-family:\'Pinyon Script\',cursive;font-size:30px;background:var(--grad-name);-webkit-background-clip:text;background-clip:text;color:transparent;display:block;">Fabiola Díaz</p>' +
@@ -1938,37 +1867,6 @@ function googleTranslateElementInit(){
         alert('Ocurrió un error. Por favor intenta de nuevo.');
       }
     });
-  })();
-
-  // ── CAPÍTULOS ANTICIPADOS → Supabase ────────────────────
-  (function(){
-    var overlay=document.getElementById('modal-capitulos');
-    var closeBtn=document.getElementById('modal-close');
-    var btnOpen=document.getElementById('btn-capitulos');
-    if(btnOpen) btnOpen.addEventListener('click',function(){if(overlay)overlay.classList.add('open');});
-    if(closeBtn) closeBtn.addEventListener('click',function(){if(overlay)overlay.classList.remove('open');});
-    if(overlay) overlay.addEventListener('click',function(e){if(e.target===overlay)overlay.classList.remove('open');});
-    var capsRelease=new Date('2026-09-18T06:00:00Z'); // 00:00 CDMX
-    if(new Date()>=capsRelease){
-      var locked=document.getElementById('caps-locked');
-      var fw=document.getElementById('caps-form-wrap');
-      if(locked)locked.style.display='none';
-      if(fw)fw.style.display='block';
-    }
-    var capsBtnSend=document.getElementById('caps-btn-send');
-    if(capsBtnSend){
-      capsBtnSend.addEventListener('click',async function(){
-        var nombre=document.getElementById('caps-nombre').value.trim();
-        var email=document.getElementById('caps-email').value.trim();
-        if(!email){alert('Ingresa tu correo.');return;}
-        capsBtnSend.disabled=true;
-        try{
-          await sb.from('solicitudes_capitulos').insert([{nombre:nombre,email:email}]);
-          document.getElementById('caps-form').innerHTML='<p style="color:var(--gold);font-family:Cinzel,serif;font-size:13px;text-align:center;letter-spacing:.08em;">✦ Solicitud recibida. Recibirás los capítulos pronto. ✦</p>';
-          enviarNotificacion('Capítulos — '+nombre,'Nombre: '+nombre+'\nEmail: '+email);
-        }catch(err){capsBtnSend.disabled=false;alert('Error. Intenta de nuevo.');}
-      });
-    }
   })();
 
   // ── FOREIGN RIGHTS → Supabase ───────────────────────────
