@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /la-misma-llama.html
+Disallow: /the-weight-of-wonder-malakh.html
+Disallow: /soundtrack-oficial.html
+
+Sitemap: https://seaenelinfiernocomoenelcielo.vercel.app/sitemap.xml
