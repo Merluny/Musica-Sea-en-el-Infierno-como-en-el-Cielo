@@ -926,12 +926,12 @@
   .destacado-card .c-texto{ font-size:15px; line-height:1.7; color:var(--ink); flex-grow:1; }
 
   /* ---------- OFFSET DE ANCLAS PARA ENCABEZADO FIJO ---------- */
-  #comprar, #sinopsis, #comentarios-destacados, #circulo-la-voz, #prensa, #editorial-rights, #preregistro,
+  #trailer, #comprar, #sinopsis, #comentarios-destacados, #circulo-la-voz, #prensa, #editorial-rights, #preregistro,
   .comentarios-wrapper[id]{
     scroll-margin-top: 100px;
   }
   @media(max-width:480px){
-    #comprar, #sinopsis, #comentarios-destacados, #circulo-la-voz, #prensa, #editorial-rights, #preregistro,
+    #trailer, #comprar, #sinopsis, #comentarios-destacados, #circulo-la-voz, #prensa, #editorial-rights, #preregistro,
     .comentarios-wrapper[id]{
       scroll-margin-top: 90px;
     }
@@ -968,6 +968,33 @@
     border:1px solid var(--rule); color:var(--ink-dim); opacity:.6; cursor:default;
     pointer-events:none;
   }
+
+  /* ---------- TRÁILER ---------- */
+  .trailer-grid{
+    display:flex; flex-wrap:wrap; gap:22px; justify-content:center; margin-top:8px;
+  }
+  .trailer-card{
+    width:min(230px, 42vw);
+  }
+  .trailer-frame{
+    position:relative; width:100%; aspect-ratio:9/16; border-radius:6px; overflow:hidden;
+    background:#000; cursor:pointer; border:1px solid var(--rule);
+  }
+  .trailer-frame img{
+    position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.75;
+  }
+  .trailer-frame iframe{
+    position:absolute; inset:0; width:100%; height:100%; border:0;
+  }
+  .trailer-play{
+    position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+    width:54px; height:54px; border-radius:50%;
+    background:linear-gradient(120deg,#caa46c,#8c6fb0);
+    display:flex; align-items:center; justify-content:center;
+    color:#0d0817; font-size:18px; box-shadow:0 6px 18px rgba(0,0,0,.5);
+    transition:transform .3s ease;
+  }
+  .trailer-frame:hover .trailer-play{ transform:translate(-50%,-50%) scale(1.08); }
 
 </style>
 
@@ -1024,6 +1051,7 @@ function googleTranslateElementInit(){
   </div>
   <nav class="site-nav" aria-label="Navegación principal">
     <ul class="nav-links" id="nav-links">
+      <li><a href="#trailer">Tráiler</a></li>
       <li><a href="#comprar">Comprar</a></li>
       <li><a href="#sinopsis">Sinopsis</a></li>
       <li><a href="#circulo-la-voz">Círculo de la Voz</a></li>
@@ -1065,6 +1093,30 @@ function googleTranslateElementInit(){
   </div>
   <div class="scrollcue"></div>
 </section>
+
+<section id="trailer" class="wide reveal" style="text-align:center;">
+  <p class="eyebrow">Adelanto</p>
+  <h2>Tráiler</h2>
+  <div class="trailer-grid">
+
+    <div class="trailer-card">
+      <div class="trailer-frame" data-video-id="bwJ6wwNG4K8" role="button" tabindex="0" aria-label="Reproducir tráiler 1 de Sea en el Infierno como en el Cielo">
+        <img src="https://img.youtube.com/vi/bwJ6wwNG4K8/hqdefault.jpg" alt="Miniatura del tráiler 1 de Sea en el Infierno como en el Cielo" loading="lazy">
+        <span class="trailer-play">▶</span>
+      </div>
+    </div>
+
+    <div class="trailer-card">
+      <div class="trailer-frame" data-video-id="jsO4Ccgf4RY" role="button" tabindex="0" aria-label="Reproducir tráiler 2 de Sea en el Infierno como en el Cielo">
+        <img src="https://img.youtube.com/vi/jsO4Ccgf4RY/hqdefault.jpg" alt="Miniatura del tráiler 2 de Sea en el Infierno como en el Cielo" loading="lazy">
+        <span class="trailer-play">▶</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
 
 <section id="comprar" class="wide reveal" style="text-align:center;">
   <p class="eyebrow">Disponible ahora</p>
@@ -1137,7 +1189,7 @@ function googleTranslateElementInit(){
 <div class="divider"></div>
 
 <!-- ============ PREREGISTRO / QR ============ -->
-<section id="preregistro" class="wide reveal" style="text-align:center;">
+<section id="preregistro" class="wide reveal" style="text-align:center; display:none;">
   <p class="eyebrow">Mantente cerca de la historia</p>
   <h2>Recibe noticias de la <em>autora</em></h2>
   
@@ -1660,7 +1712,7 @@ function googleTranslateElementInit(){
 
   // ── ACTIVE NAV ON SCROLL ──────────────────────────────────
   (function(){
-    var ids=['comprar','sinopsis','circulo-la-voz','prensa','editorial-rights'];
+    var ids=['trailer','comprar','sinopsis','circulo-la-voz','prensa','editorial-rights'];
     window.addEventListener('scroll',function(){
       var cur='';
       ids.forEach(function(id){
@@ -2141,6 +2193,62 @@ function googleTranslateElementInit(){
       }
     }
     cargarDestacados();
+  })();
+
+  // ── TRÁILER (carga diferida de YouTube, sin autoplay al cargar) ──
+  (function(){
+    var frames = document.querySelectorAll('.trailer-frame');
+    if(!frames.length) return;
+
+    function pausarSoundtrack(){
+      var audio = document.getElementById('st-audio');
+      if(audio && !audio.paused){ audio.pause(); }
+    }
+    function detenerOtrosTrailers(exceptoFrame){
+      frames.forEach(function(f){
+        if(f !== exceptoFrame && f.dataset.playing === '1'){
+          reiniciarFrame(f);
+        }
+      });
+    }
+    function reiniciarFrame(frame){
+      var videoId = frame.dataset.videoId;
+      var img = frame.querySelector('img');
+      var iframe = frame.querySelector('iframe');
+      if(iframe) iframe.remove();
+      if(img) img.style.display = '';
+      var play = frame.querySelector('.trailer-play');
+      if(play) play.style.display = '';
+      frame.dataset.playing = '0';
+    }
+    function reproducir(frame){
+      if(frame.dataset.playing === '1') return;
+      detenerOtrosTrailers(frame);
+      pausarSoundtrack();
+      var videoId = frame.dataset.videoId;
+      var img = frame.querySelector('img');
+      var play = frame.querySelector('.trailer-play');
+      var iframe = document.createElement('iframe');
+      iframe.src = 'https://www.youtube-nocookie.com/embed/' + videoId + '?autoplay=1&rel=0&playsinline=1';
+      iframe.title = 'Tráiler — Sea en el Infierno como en el Cielo';
+      iframe.setAttribute('allow', 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture');
+      iframe.setAttribute('allowfullscreen', '');
+      frame.appendChild(iframe);
+      if(img) img.style.display = 'none';
+      if(play) play.style.display = 'none';
+      frame.dataset.playing = '1';
+    }
+    frames.forEach(function(frame){
+      frame.addEventListener('click', function(){ reproducir(frame); });
+      frame.addEventListener('keydown', function(e){
+        if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); reproducir(frame); }
+      });
+    });
+    // Si el soundtrack empieza a sonar, detener cualquier tráiler activo
+    var stAudio = document.getElementById('st-audio');
+    if(stAudio){
+      stAudio.addEventListener('play', function(){ detenerOtrosTrailers(null); });
+    }
   })();
 
 </script>
