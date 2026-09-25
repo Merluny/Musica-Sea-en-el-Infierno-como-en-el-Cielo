@@ -1127,7 +1127,23 @@ function googleTranslateElementInit(){
     <p class="buy-note">Incluido en Kindle Unlimited</p>
     <div class="buy-btns">
       <a class="btn primary" href="https://www.amazon.com.mx/dp/B0HKQC6J8M" target="_blank" rel="noopener">Comprar en México</a>
-      <a class="btn secondary" href="https://www.amazon.com/dp/B0HKQC6J8M" target="_blank" rel="noopener">EE. UU. / Internacional</a>
+      <a class="btn secondary" href="https://www.amazon.com/dp/B0HKQC6J8M" target="_blank" rel="noopener">Estados Unidos</a>
+    </div>
+    <div style="margin-top:14px;">
+      <select class="buy-select" id="eb-otros-paises" aria-label="Otros países para eBook">
+        <option value="">Otros países…</option>
+        <option value="https://www.amazon.co.uk/dp/B0HKQC6J8M">Reino Unido</option>
+        <option value="https://www.amazon.de/dp/B0HKQC6J8M">Alemania</option>
+        <option value="https://www.amazon.fr/dp/B0HKQC6J8M">Francia</option>
+        <option value="https://www.amazon.es/dp/B0HKQC6J8M">España</option>
+        <option value="https://www.amazon.it/dp/B0HKQC6J8M">Italia</option>
+        <option value="https://www.amazon.nl/dp/B0HKQC6J8M">Países Bajos</option>
+        <option value="https://www.amazon.co.jp/dp/B0HKQC6J8M">Japón</option>
+        <option value="https://www.amazon.com.br/dp/B0HKQC6J8M">Brasil</option>
+        <option value="https://www.amazon.ca/dp/B0HKQC6J8M">Canadá</option>
+        <option value="https://www.amazon.com.au/dp/B0HKQC6J8M">Australia</option>
+        <option value="https://www.amazon.in/dp/B0HKQC6J8M">India</option>
+      </select>
     </div>
   </div>
 
@@ -1153,13 +1169,32 @@ function googleTranslateElementInit(){
             <option value="https://www.amazon.se/dp/B0HKQ1DQTR">Suecia</option>
             <option value="https://www.amazon.pl/dp/B0HKQ1DQTR">Polonia</option>
             <option value="https://www.amazon.com.be/dp/B0HKQ1DQTR">Bélgica</option>
+            <option value="https://www.amazon.ie/dp/B0HKQ1DQTR">Irlanda</option>
       </select>
     </div>
   </div>
 
   <div class="buy-block">
     <h3>📕 Pasta dura — edición especial de colección</h3>
-    <span class="btn disabled">Disponible a partir del 25 de septiembre</span>
+    <div class="buy-btns">
+      <a class="btn primary" href="https://www.amazon.com/dp/B0HKLCL3LR" target="_blank" rel="noopener">Estados Unidos</a>
+    </div>
+    <p style="font-size:11px;color:var(--ink-dim);margin-top:10px;">Comprar desde fuera de tu país puede incluir cargos de importación.</p>
+    <div style="margin-top:14px;">
+      <select class="buy-select" id="pd-otros-paises" aria-label="Otros países para pasta dura">
+        <option value="">Otros países…</option>
+        <option value="https://www.amazon.co.uk/dp/B0HKLCL3LR">Reino Unido</option>
+        <option value="https://www.amazon.de/dp/B0HKLCL3LR">Alemania</option>
+        <option value="https://www.amazon.fr/dp/B0HKLCL3LR">Francia</option>
+        <option value="https://www.amazon.es/dp/B0HKLCL3LR">España</option>
+        <option value="https://www.amazon.it/dp/B0HKLCL3LR">Italia</option>
+        <option value="https://www.amazon.nl/dp/B0HKLCL3LR">Países Bajos</option>
+        <option value="https://www.amazon.pl/dp/B0HKLCL3LR">Polonia</option>
+        <option value="https://www.amazon.se/dp/B0HKLCL3LR">Suecia</option>
+        <option value="https://www.amazon.com.be/dp/B0HKLCL3LR">Bélgica</option>
+        <option value="https://www.amazon.ie/dp/B0HKLCL3LR">Irlanda</option>
+      </select>
+    </div>
   </div>
 </section>
 
@@ -1673,12 +1708,14 @@ function googleTranslateElementInit(){
   }
 
 
-  // ── SELECTOR OTROS PAÍSES (pasta blanda) ──────────────────
+  // ── SELECTOR OTROS PAÍSES (eBook, pasta blanda, pasta dura) ──
   (function(){
-    var sel = document.getElementById('pb-otros-paises');
-    if(!sel) return;
-    sel.addEventListener('change', function(){
-      if(sel.value){ window.open(sel.value, '_blank', 'noopener'); sel.value=''; }
+    ['eb-otros-paises','pb-otros-paises','pd-otros-paises'].forEach(function(id){
+      var sel = document.getElementById(id);
+      if(!sel) return;
+      sel.addEventListener('change', function(){
+        if(sel.value){ window.open(sel.value, '_blank', 'noopener'); sel.value=''; }
+      });
     });
   })();
 
