@@ -2184,6 +2184,12 @@ function googleTranslateElementInit(){
           card.appendChild(crearTextoExpandible('“' + c.comentario + '”'));
           grid.appendChild(card);
         });
+        // La sección nace oculta en el HTML; se muestra solo cuando hay testimonios
+        var secOk = document.getElementById('comentarios-destacados');
+        if(secOk){
+          secOk.style.display = '';
+          secOk.classList.add('in');
+        }
       }catch(err){
         console.error('Error cargando destacados', err);
         var sec = document.getElementById('comentarios-destacados');

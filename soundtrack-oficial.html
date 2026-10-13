@@ -105,13 +105,23 @@
         <audio id="audio-2" src="the-weight-of-wonder-malakh.mp3" preload="none"></audio>
       </div>
 
+      <div class="divider"></div>
+
+      <div class="track-card">
+        <p class="track-title">Angélique</p>
+        <button class="play-btn" id="play-3" type="button">
+          <span id="icon-3">▶</span><span id="label-3">Reproducir</span>
+        </button>
+        <audio id="audio-3" src="angelique.mp3" preload="none"></audio>
+      </div>
+
     </div>
 
     <p class="footer-mark">Sea en el Infierno como en el Cielo · Fabiola Díaz</p>
   </div>
   <script>
     (function(){
-      var ids = ['1','2'];
+      var ids = ['1','2','3'];
       ids.forEach(function(n){
         var btn = document.getElementById('play-'+n);
         var audio = document.getElementById('audio-'+n);
