@@ -16,13 +16,13 @@
   body{
     margin:0; min-height:100vh; background:var(--bg); color:var(--ink);
     font-family:'EB Garamond', serif; font-size:19px; line-height:1.7;
-    display:flex; align-items:center; justify-content:center; padding:56px 20px;
+    display:flex; flex-direction:column; align-items:center; justify-content:flex-start; padding:0;
     background-image:radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,.5), transparent),
                       radial-gradient(1px 1px at 70% 60%, rgba(255,255,255,.4), transparent),
                       radial-gradient(1px 1px at 40% 80%, rgba(255,255,255,.3), transparent),
                       radial-gradient(1px 1px at 90% 20%, rgba(255,255,255,.4), transparent);
   }
-  .wrap{ max-width:480px; width:100%; text-align:center; }
+  .wrap{ max-width:480px; width:100%; text-align:center; padding:48px 20px 56px; }
   @media(min-width:700px){
     .wrap{ max-width:680px; }
   }
@@ -70,9 +70,72 @@
     margin-top:44px; font-family:'Cinzel',serif; font-size:10px; letter-spacing:.12em;
     color:var(--rule); text-transform:uppercase;
   }
+
+  /* Navegación superior */
+  .topbar{
+    width:100%; background:rgba(8,5,15,.96); border-bottom:1px solid rgba(201,168,122,.2);
+    position:sticky; top:0; z-index:50;
+  }
+  .topbar-in{
+    max-width:980px; margin:0 auto; padding:8px 16px; display:flex; flex-wrap:wrap;
+    align-items:center; justify-content:space-between; gap:4px 16px;
+  }
+  .brand{
+    font-family:'Cinzel',serif; font-size:13px; letter-spacing:.14em; text-transform:uppercase;
+    text-decoration:none; min-height:44px; display:flex; align-items:center;
+    background:linear-gradient(90deg,#8c6fb0,#c9a87a 40%,#b39bd6 70%,#c9a87a);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .topnav{ display:flex; align-items:center; gap:8px; }
+  .nav-link{
+    font-family:'Cinzel',serif; font-size:11px; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--ink); text-decoration:none; min-height:44px; padding:0 12px;
+    display:inline-flex; align-items:center; transition:color .3s ease;
+  }
+  .nav-link:hover{ color:var(--gold); }
+  .btn{
+    font-family:'Cinzel',serif; font-size:12px; letter-spacing:.12em; text-transform:uppercase;
+    text-decoration:none; min-height:48px; padding:0 26px; border-radius:2px;
+    display:inline-flex; align-items:center; justify-content:center;
+    transition:transform .35s ease, box-shadow .35s ease, border-color .35s ease, color .35s ease;
+  }
+  .btn.primary{ background:linear-gradient(120deg,#caa46c,#8c6fb0); color:#0d0817; font-weight:600; }
+  .btn.primary:hover{ transform:translateY(-2px); box-shadow:0 10px 24px rgba(180,140,200,.35); }
+  .btn.secondary{ border:1px solid rgba(255,255,255,.28); color:var(--ink); background:transparent; }
+  .btn.secondary:hover{ border-color:var(--gold); color:var(--gold); }
+  .topnav .btn{ min-height:44px; padding:0 18px; font-size:11px; }
+  a:focus-visible{ outline:2px solid var(--gold); outline-offset:3px; }
+  @media(max-width:520px){
+    .topbar-in{ justify-content:center; }
+    .brand{ font-size:12px; text-align:center; }
+    .topnav{ width:100%; justify-content:center; }
+  }
+
+  /* Llamada a la acción */
+  .cta{ margin-top:48px; padding-top:36px; border-top:1px solid var(--rule); }
+  .cta-text{ font-style:italic; font-size:1.1em; line-height:1.7; margin:0 0 26px; }
+  .cta-btns{ display:flex; flex-direction:column; gap:14px; align-items:stretch; max-width:340px; margin:0 auto; }
+  @media(min-width:600px){
+    .cta-btns{ flex-direction:row; justify-content:center; max-width:none; }
+  }
+  .footer-home{
+    display:inline-flex; align-items:center; min-height:44px; padding:0 14px; margin-top:20px;
+    font-family:'Cinzel',serif; font-size:12px; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--lavender); text-decoration:none;
+  }
+  .footer-home:hover{ color:var(--gold); }
 </style>
 </head>
 <body>
+  <header class="topbar">
+    <nav class="topbar-in" aria-label="Navegación principal">
+      <a class="brand" href="/">Sea en el Infierno como en el Cielo</a>
+      <div class="topnav">
+        <a class="nav-link" href="/">Conoce el libro</a>
+        <a class="btn primary" href="https://www.amazon.com.mx/stores/Fabiola-D%C3%ADaz/author/B0HKQFL8PD" target="_blank" rel="noopener">Comprar el libro</a>
+      </div>
+    </nav>
+  </header>
   <div class="wrap">
     <p class="eyebrow">Original Book Soundtrack</p>
     <h1>Soundtrack <em>Oficial</em></h1>
@@ -118,7 +181,16 @@
 
     </div>
 
+    <section class="cta" aria-label="Conoce la novela">
+      <p class="cta-text">Cada pieza de este soundtrack nace de la novela. Descubre la historia completa.</p>
+      <div class="cta-btns">
+        <a class="btn primary" href="https://www.amazon.com.mx/stores/Fabiola-D%C3%ADaz/author/B0HKQFL8PD" target="_blank" rel="noopener">Comprar en Amazon</a>
+        <a class="btn secondary" href="/">Conocer la novela</a>
+      </div>
+    </section>
+
     <p class="footer-mark">Sea en el Infierno como en el Cielo · Fabiola Díaz</p>
+    <a class="footer-home" href="/">← Volver al inicio</a>
   </div>
   <script>
     (function(){
