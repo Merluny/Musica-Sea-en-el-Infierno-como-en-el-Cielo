@@ -217,6 +217,21 @@
         <audio id="audio-3" src="angelique.mp3" preload="metadata"></audio>
       </div>
 
+      <div class="divider"></div>
+
+      <div class="track-card">
+        <img class="track-cover" src="sunlight-through-closed-eyes-cover.jpg" alt="Sunlight Through Closed Eyes">
+        <p class="track-title">Sunlight Through Closed Eyes</p>
+        <button class="play-btn" id="play-4" type="button">
+          <span id="icon-4">▶</span><span id="label-4">Reproducir</span>
+        </button>
+        <div class="seek" id="seek-4" role="slider" tabindex="0" aria-label="Progreso de la pieza" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="0:00">
+          <div class="seek-fill" id="fill-4"></div><div class="seek-knob" id="knob-4"></div>
+        </div>
+        <div class="seek-time"><span id="cur-4">0:00</span><span id="dur-4">--:--</span></div>
+        <audio id="audio-4" src="sunlight-through-closed-eyes.mp3" preload="metadata"></audio>
+      </div>
+
     </div>
 
     <section class="cta" aria-label="Conoce la novela">
@@ -232,7 +247,7 @@
   </div>
   <script>
     (function(){
-      var ids = ['1','2','3'];
+      var ids = ['1','2','3','4'];
       ids.forEach(function(n){
         var btn = document.getElementById('play-'+n);
         var audio = document.getElementById('audio-'+n);
@@ -259,7 +274,7 @@
 
     (function(){
       function fmt(t){ if(!isFinite(t)) return '--:--'; var m=Math.floor(t/60), x=Math.floor(t%60); return m+':'+(x<10?'0':'')+x; }
-      ['1','2','3'].forEach(function(n){
+      ['1','2','3','4'].forEach(function(n){
         var audio=document.getElementById('audio-'+n), bar=document.getElementById('seek-'+n);
         var fill=document.getElementById('fill-'+n), knob=document.getElementById('knob-'+n);
         var cur=document.getElementById('cur-'+n), dur=document.getElementById('dur-'+n);
